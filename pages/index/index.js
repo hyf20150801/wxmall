@@ -1,38 +1,56 @@
-//Page Object
+// 0 引入 用来发送请求的方法 微信小程序引入要把路径补全
+import { request } from "../../request/index.js"
 Page({
   data: {
+    //轮播图数值
+    swiperList:[],
+    //导航 数值
+    catesList:[],
+    // 楼层数据
+    floorList:[]
+
     
   },
   //options(Object)
   onLoad: function(options){
-    
-  },
-  onReady: function(){
-    
-  },
-  onShow: function(){
-    
-  },
-  onHide: function(){
+    //1 发送异步请求获取轮播图数据  优化手段通过es6的promise来解决回调地狱问题
+    // wx.request({
+    //   url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata',
+    //   success: (result)=>{
+    //     this.setData({
+    //       swiperList:result.data.message
+    //     })
+    //   }
+    // });
 
+    this.getSwiperList();
+    this.getCateList();
+    this.getFloorList();
   },
-  onUnload: function(){
-
+  // 获取轮播图数据
+  getSwiperList(){
+    request({url:"https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata"})
+    .then(result =>{
+      this.setData({
+              swiperList:result.data.message
+             })
+    })
   },
-  onPullDownRefresh: function(){
-
-  },
-  onReachBottom: function(){
-
-  },
-  onShareAppMessage: function(){
-
-  },
-  onPageScroll: function(){
-
-  },
-  //item(index,pagePath,text)
-  onTabItemTap:function(item){
-
-  }
+    // 获取 分类导航数据
+    getCateList(){
+      request({url:"https://api-hmugo-web.itheima.net/api/public/v1/home/catitems"})
+      .then(result =>{
+        this.setData({
+          catesList:result.data.message
+               })
+      })
+    }, // 获取 分类导航数据
+    getFloorList(){
+      request({url:"https://api-hmugo-web.itheima.net/api/public/v1/home/floordata"})
+      .then(result =>{
+        this.setData({
+          floorList:result.data.message
+               })
+      })
+    }
 });
