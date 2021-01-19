@@ -15,10 +15,10 @@ Page({
   onLoad: function(options){
     //1 发送异步请求获取轮播图数据  优化手段通过es6的promise来解决回调地狱问题
     // wx.request({
-    //   url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata',
+    //   url: ' /home/swiperdata',
     //   success: (result)=>{
     //     this.setData({
-    //       swiperList:result.data.message
+    //       swiperList:result  
     //     })
     //   }
     // });
@@ -29,27 +29,27 @@ Page({
   },
   // 获取轮播图数据
   getSwiperList(){
-    request({url:"https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata"})
+    request({url:"/home/swiperdata"})
     .then(result =>{
       this.setData({
-              swiperList:result.data.message
+              swiperList:result
              })
     })
   },
     // 获取 分类导航数据
     getCateList(){
-      request({url:"https://api-hmugo-web.itheima.net/api/public/v1/home/catitems"})
+      request({url:"/home/catitems"})
       .then(result =>{
         this.setData({
-          catesList:result.data.message
+          catesList:result
                })
       })
     }, // 获取 分类导航数据
     getFloorList(){
-      request({url:"https://api-hmugo-web.itheima.net/api/public/v1/home/floordata"})
+      request({url:"/home/floordata"})
       .then(result =>{
         this.setData({
-          floorList:result.data.message
+          floorList:result
                })
       })
     }
