@@ -37,7 +37,6 @@ Page({
     let cart = wx.getStorageSync("cart")||[];
     // 过滤后的购物车数组
     cart= cart.filter(v=>v.checked);
-    this.setData({address});
      // 1 总价格 总数量
      let totalPrice = 0;
      let totalNum = 0;
@@ -48,8 +47,8 @@ Page({
      this.setData({cart,totalPrice,totalNum,address});
   },
   // 点击 支付
-  handleOrderPay(){
-    /*try {
+  async handleOrderPay(){
+    try {
       // 1 判断缓存中有没有token
     const token = wx.getStorageSync("token");
     // 2 判断
@@ -96,6 +95,6 @@ Page({
     } catch (error) {
     await showToast({title:"支付失败"})  
       console.log(error);   
-    }*/
+    }
   }
 })
